@@ -1,0 +1,5 @@
+PHP library for Superfeedr's Pubsubhubbub (client).
+
+You might want to modify it because it removes HTML from the titles and entries. Also, you might want to modify it a little to add more security (per-feed subscription keys).
+
+Edit library vars to add password, endpoint URL and other stuff.
