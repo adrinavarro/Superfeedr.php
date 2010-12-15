@@ -1,5 +1,5 @@
 PHP library for Superfeedr's Pubsubhubbub (client).
 
-You might want to modify it because it removes HTML from the titles and entries. Also, you might want to modify it a little to add more security (per-feed subscription keys).
+Modified from Adrián Navarro original library.
 
-Edit library vars to add password, endpoint URL and other stuff.
+endpoint.php should be your callback and subscriber.php is an example script subscribing a feed.
