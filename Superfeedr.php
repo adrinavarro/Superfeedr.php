@@ -30,9 +30,9 @@ THE SOFTWARE.
  */
 class Superfeedr {
     private $apiUrl = 'https://superfeedr.com/hubbub';
-	private $callback = null;
-	private $authentication = null;
-	private $hubSecret = 'myHubSecret';
+    private $callback = null;
+    private $authentication = null;
+    private $hubSecret = 'myHubSecret';
 
     /**
      * Superfeedr constructor
@@ -204,20 +204,20 @@ class Superfeedr {
      * @param string $hubSecret Optional hub secret.
      * @return array The data sent from Superfeedr
      **/
-	function verify($hubSecret = null)
-	{
-	    if (!empty($hubSecret)) {
-	        $this->hubSecret = $hubSecret;
-	    }
+     public function verify($hubSecret = null)
+     {
+         if (!empty($hubSecret)) {
+             $this->hubSecret = $hubSecret;
+         }
 
-		if (!empty($_GET['hub_verify_token']) &&
-		    $_GET['hub_verify_token'] == md5($_GET['hub_mode'] . $this->hubSecret)) {
-			echo $_GET['hub_challenge'];
-			return $_GET;
-		} else {
-		    return false;
-		}
-	}
+         if (!empty($_GET['hub_verify_token']) &&
+         $_GET['hub_verify_token'] == md5($_GET['hub_mode'] . $this->hubSecret)) {
+             echo $_GET['hub_challenge'];
+             return $_GET;
+         } else {
+             return false;
+         }
+     }
 
     /**
      * Receives a callback from Superfeedr and validate its authenticity.
@@ -230,21 +230,21 @@ class Superfeedr {
      * @uses sha1
      * @uses json_decode
      **/
-	function callback($hubSecret = null)
-	{
-	    if (!empty($hubSecret)) {
-	        $this->hubSecret = $hubSecret;
-	    }
+     public function callback($hubSecret = null)
+     {
+         if (!empty($hubSecret)) {
+             $this->hubSecret = $hubSecret;
+         }
 
-		if ($input = file_get_contents('php://input')) {
-			if($check = trim($_SERVER['HTTP_X_HUB_SIGNATURE'])) {
-				$sum = hash_hmac('sha1', $input, sha1($this->hubSecret));
-				if($check == 'sha1=' . $sum) {
-					return json_decode($input);
-				}
-			}
-		}
-		return false;
-	}
+         if ($input = file_get_contents('php://input')) {
+             if($check = trim($_SERVER['HTTP_X_HUB_SIGNATURE'])) {
+                 $sum = hash_hmac('sha1', $input, sha1($this->hubSecret));
+                 if($check == 'sha1=' . $sum) {
+                     return json_decode($input);
+                 }
+             }
+         }
+         return false;
+     }
 }
 ?>
